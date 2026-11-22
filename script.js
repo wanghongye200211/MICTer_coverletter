@@ -156,7 +156,7 @@
       timeTicks: [0, 12, 24, 36, 48, 60, 72, 84, 96],
       scoreMax: 3,
       scoreTick: 1,
-      scoreHeading: 'Transition score',
+      scoreHeading: 'Transitional score',
       scoreSymbol: 'C(t)',
       scoreLegend: '32-rollout mean',
       observedLegend: 'All observed cells',
@@ -179,7 +179,7 @@
       timeTicks: [0, 1, 2, 3, 4, 5],
       scoreMax: 9,
       scoreTick: 2,
-      scoreHeading: 'Transition score',
+      scoreHeading: 'Transitional score',
       scoreSymbol: 'C(t)',
       scoreLegend: '32-rollout mean',
       observedLegend: 'All observed cells',
@@ -200,9 +200,10 @@
       timeTicks: [0, 5, 10, 15, 20, 25, 30],
       scoreMax: 1.4,
       scoreTick: 0.5,
-      scoreHeading: 'Transition indicator',
+      scoreHeading: 'Transitional score',
       scoreSymbol: 'I(t)',
       scoreLegend: '32-rollout mean · trailing window · day 7 = 1',
+      scoreBaseline: {from: 0, to: 7, value: 1, label: 'indicator from day 7'},
       observedLegend: 'All observed cells',
       frameDelays: [100, 140],
       footnote: 'Displayed populations are reconstructed snapshots, not tracked descendants. The projection is the continuous-dynamics PCA fitted on observed cells, with frames interpolated along 96 reconstructed trajectories and displayed as 384 particles over days 0–30. The indicator is defined from day 7; frames before day 7 are shown without an indicator value. The indicator uses a trailing 2.5-day window; each of the 32 rollouts is normalized to its own day-7 value and the curves are then averaged. The full time course contributed to model fitting.',
@@ -222,7 +223,7 @@
       timeTicks: [0, 1, 2, 3, 4],
       scoreMax: 1.2,
       scoreTick: 0.2,
-      scoreHeading: 'Transition indicator',
+      scoreHeading: 'Transitional score',
       scoreSymbol: 'I(t)',
       scoreLegend: '32-rollout mean · t0 = Day 0.5',
       observedLegend: 'All observed cells',
@@ -243,7 +244,7 @@
       timeTicks: [0, 1, 2, 3, 4, 5, 6, 7],
       scoreMax: 1.2,
       scoreTick: 0.2,
-      scoreHeading: 'Transition indicator',
+      scoreHeading: 'Transitional score',
       scoreSymbol: 'I(t)',
       scoreLegend: '32-rollout mean · t0 = Day 0.5',
       observedLegend: 'Observed cells · 8,000 shown',
@@ -350,6 +351,12 @@
     }
     svg.append(svgElement('text', {x: 330, y: 411, class: 'plot-axis-label', 'text-anchor': 'middle'}, `Time (${meta.timeUnit})`));
     svg.append(svgElement('text', {transform: 'translate(15,200) rotate(-90)', class: 'plot-axis-label', 'text-anchor': 'middle'}, meta.scoreHeading));
+    if (meta.scoreBaseline) {
+      const b = meta.scoreBaseline;
+      const baselinePath = `M${scoreX(b.from).toFixed(3)},${scoreY(b.value).toFixed(3)} L${scoreX(b.to).toFixed(3)},${scoreY(b.value).toFixed(3)}`;
+      svg.append(svgElement('path', {d: baselinePath, fill: 'none', stroke: '#9aa8bf', 'stroke-width': 2, 'stroke-dasharray': '6 6'}));
+      svg.append(svgElement('text', {x: scoreX((b.from + b.to) / 2), y: scoreY(b.value) - 10, class: 'plot-tick', 'text-anchor': 'middle', fill: '#7b879c'}, b.label));
+    }
     svg.append(svgElement('path', {d: path, 'clip-path': 'url(#score-time-clip)', class: 'score-stroke', fill: 'none', 'stroke-width': 3.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
     cursor = svgElement('line', {x1: 55, x2: 55, y1: 37, y2: 365, stroke: '#7586a2', 'stroke-width': 1.5, 'stroke-dasharray': '4 5'});
     cursorDot = svgElement('circle', {cx: 55, cy: scoreY(1), r: 5, class: 'score-stroke', fill: '#fff', 'stroke-width': 2.5});
