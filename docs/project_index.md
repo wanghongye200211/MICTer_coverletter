@@ -1,8 +1,12 @@
 # Project index
 
-Updated 2026-11-13. Local website accompanying the current MICTer manuscript.
+The cover letter website contains a static manuscript figure bundle and five interactive reconstructions.
 
-- `index.html`: a compact workflow, six result panels from five applications, interactive iPSC example and cover letter.
-- `figure-config.js`: Main Figures 2–6.
-- `docs/asset-manifest.json`: source provenance and hashes.
-- `downloads/scMICTer_cover_letter.txt`: journal-neutral cover letter.
+| Component | Files | Documentation |
+| --- | --- | --- |
+| Site and cover letter | [`index.html`](../index.html), [`styles.css`](../styles.css), [`script.js`](../script.js), [`downloads/scMICTer_cover_letter.txt`](../downloads/scMICTer_cover_letter.txt) | [Local preview](../README.md) |
+| Interactive reconstructions | [`dataset-config.js`](../dataset-config.js), [`interactive.js`](../interactive.js), and the five `data*.js` caches | [Cache formats, score definitions, and contributors](interactive-data.md) |
+| Static figure browser | [`figure-config.js`](../figure-config.js), [`assets/figures/`](../assets/figures/), [`assets/pdfs/`](../assets/pdfs/) | [Figure index](figure_index.md) and [asset manifest](asset-manifest.json) |
+| Static asset refresh | [`tools/build_assets.py`](../tools/build_assets.py) | [Refresh requirements](../README.md#repository-layout) |
+
+See the [work log](experiment_log.md) for updates to the interactive data and player.

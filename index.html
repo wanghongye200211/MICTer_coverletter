@@ -8,13 +8,15 @@
   <title>MICTer · Manifold-Informed Critical Transition Decipherer</title>
   <link rel="icon" href="assets/favicon.svg?v=f3c00a15ccfc" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=8426379c379e">
-  <script src="data-endoderm.js" defer></script>
-  <script src="data.js?v=1b65e9d6b51f" defer></script>
-  <script src="data-emt-met.js" defer></script>
-  <script src="data-pancreatic.js" defer></script>
-  <script src="data-cardiac.js" defer></script>
-  <script src="figure-config.js" defer></script>
-  <script src="script.js?v=e2c80d83f961" defer></script>
+  <script src="data-endoderm.js?v=20261127" defer></script>
+  <script src="data.js?v=20261127" defer></script>
+  <script src="data-emt-met.js?v=20261127" defer></script>
+  <script src="data-pancreatic.js?v=20261127" defer></script>
+  <script src="data-cardiac.js?v=20261127" defer></script>
+  <script src="dataset-config.js?v=20261127" defer></script>
+  <script src="interactive.js?v=20261127" defer></script>
+  <script src="figure-config.js?v=20261127" defer></script>
+  <script src="script.js?v=20261127" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -137,14 +139,15 @@
         <h2 id="interactive-title">Interactive dynamics</h2>
         <div class="interactive-shell">
           <div class="tab-list" id="dataset-tabs" role="tablist" aria-label="Interactive dataset"></div>
+          <p id="explorer-status" role="status" hidden></p>
           <div class="explorer" id="explorer-panel" role="tabpanel">
             <header class="explorer-header">
               <h3 id="explorer-title">Endoderm · GSE75748 · 0–96 h</h3>
               <div class="playback">
                 <button class="button play-button" id="play" type="button" aria-label="Play population reconstruction">▶ Play</button>
                 <label class="visually-hidden" for="time-slider">Population time</label>
-                <input id="time-slider" type="range" min="0" max="16" step="1" value="0">
-                <output id="time-output" for="time-slider">0 h</output>
+                <input id="time-slider" type="range" min="0" max="299" step="1" value="0">
+                <output id="time-output" for="time-slider" aria-live="off">0 h</output>
               </div>
             </header>
             <div class="explorer-plots">
@@ -164,10 +167,10 @@
             </div>
             <details class="explorer-details">
               <summary>Data and sampling</summary>
-              <p id="dataset-badge">Time course · 6 stages</p>
-              <p id="frame-note">384 simulated particles · measured stage</p>
-              <p>Population snapshots and scores come from separate simulations.</p>
-              <p id="explorer-footnote">The population frames are spaced 6 hours apart. The score is sampled every 0.6 hour. The full time course contributed to model fitting.</p>
+              <p id="dataset-badge">Time course · 6 sampled stages</p>
+              <p id="frame-note">384 displayed reconstruction points · sampled time</p>
+              <p id="explorer-footnote">The 300 reconstruction frames are about 0.32 hours apart. The score was evaluated every 0.6 hours.</p>
+              <p>Population snapshots and scores come from separate simulations. The browser linearly interpolates the score between cached samples. The full time course contributed to model fitting.</p>
             </details>
           </div>
         </div>
